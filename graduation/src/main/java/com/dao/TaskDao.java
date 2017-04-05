@@ -10,7 +10,7 @@ import com.entity.TaskBean;
 
 public interface TaskDao extends JpaRepository<TaskBean, Long> {
 
-	@Query("select * from TaskBean where taskId=?1")
+	@Query("select a from TaskBean  a where a.taskId=?1")
     public TaskBean getById(Long id);
 	
 

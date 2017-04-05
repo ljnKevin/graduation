@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="ACITVITY")
+@Table(name="ACTIVITY")
 public class ActivityBean implements Serializable{
 	
 	private static final long serialVersionUID = -1080307825061654607L;
@@ -25,7 +25,7 @@ public class ActivityBean implements Serializable{
 	@Column(name="ACITVITY_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Acitvity_seq")
 	@SequenceGenerator(name="Acitvity_seq", sequenceName="Acitvity_seq")
-	private Long AcitvityId;
+	private Long activityId;
 	
 	@Column(name="TITLE")
 	private String title;
@@ -64,12 +64,16 @@ public class ActivityBean implements Serializable{
 	@JoinColumn(name="USER_ID")
 	private UserBean user;
 
-	public Long getAcitvityId() {
-		return AcitvityId;
+	
+
+	
+
+	public Long getActivityId() {
+		return activityId;
 	}
 
-	public void setAcitvityId(Long acitvityId) {
-		AcitvityId = acitvityId;
+	public void setActivityId(Long activityId) {
+		this.activityId = activityId;
 	}
 
 	public String getTitle() {

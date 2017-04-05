@@ -9,7 +9,7 @@ import com.entity.NoteBookItemBean;
 
 public interface NoteBookItemDao extends JpaRepository<NoteBookItemBean, Long> {
 
-	@Query("select * from NoteBookItemBean where itemId=?1")
+	@Query("select a from NoteBookItemBean  a where a.noteBookItemId=?1")
     public NoteBookItemBean getById(Long id);
 	
 

@@ -10,7 +10,7 @@ import com.entity.ActivityBean;
 
 public interface ActivityDao extends JpaRepository<ActivityBean, Long> {
 
-	@Query("select * from ActivityBean where activityId=?1")
+	@Query("select a from ActivityBean a where a.activityId=?1")
     public ActivityBean getById(Long id);
 	
 

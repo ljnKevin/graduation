@@ -3,6 +3,7 @@ package com.school.mvc;
 import javax.inject.Inject;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.ActivityService;
@@ -14,8 +15,13 @@ public class ActivityController {
 	@Inject
 	private ActivityService activityService;
 	
-//	@RequestMapping(value="/add",method=RequestMethod.POST)
-//	  boolean addNoteBookItem(@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") Long createTime,@RequestParam("updateTime") Long updateTime) {
+	@RequestMapping(path = "/hello", method = RequestMethod.GET)
+	public String test(){
+		return "hello AV8D";
+	}
+	
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	  boolean addNoteBookItem() {
 //	      NoteBookItemBean item = new NoteBookItemBean();
 //	      Date createDate = new Date(createTime);
 //	      Date updateDate = new Date(updateTime);
@@ -25,6 +31,6 @@ public class ActivityController {
 //	      item.setTitle(title);
 //	      
 //	      noteBookService.addNoteBookItem(item);
-//		  return true;
-//	  }
+		  return true;
+	  }
 }
