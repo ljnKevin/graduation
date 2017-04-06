@@ -42,9 +42,6 @@ public class ActivityBean implements Serializable{
 	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column(name="WECHAT_NAME")
-	private String wechatName;
-	
 	@Column(name="MIN_PEOPLE")
 	private BigDecimal minPeople;
 	
@@ -114,14 +111,6 @@ public class ActivityBean implements Serializable{
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
-
-	public String getWechatName() {
-		return wechatName;
-	}
-
-	public void setWechatName(String wechatName) {
-		this.wechatName = wechatName;
 	}
 
 	public BigDecimal getMinPeople() {

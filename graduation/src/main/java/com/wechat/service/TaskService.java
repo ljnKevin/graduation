@@ -9,6 +9,6 @@ import com.wechat.domain.entity.TaskBean;
 @WebService
 public interface TaskService {
 	
-	void addTask(@WebParam(name = "task") final TaskBean task);
+	void addTask(@WebParam(name = "task") final TaskBean task,@WebParam(name = "wechatName") final String wechatName);
 
 }

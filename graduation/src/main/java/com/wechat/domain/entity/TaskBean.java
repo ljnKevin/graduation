@@ -33,6 +33,9 @@ public class TaskBean implements Serializable{
 	@Column(name="CYCLE")
 	private String cycle;
 	
+	@Column(name="CYCLE_DATE")
+	private int cycleDate;
+	
 	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
@@ -48,6 +51,15 @@ public class TaskBean implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private UserBean user;
+
+	
+	public int getCycleDate() {
+		return cycleDate;
+	}
+
+	public void setCycleDate(int cycleDate) {
+		this.cycleDate = cycleDate;
+	}
 
 	public Long getTaskId() {
 		return taskId;
