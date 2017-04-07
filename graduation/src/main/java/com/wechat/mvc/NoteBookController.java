@@ -19,6 +19,11 @@ public class NoteBookController {
 	@Inject
 	private NoteBookService noteBookService;
 	
+	@RequestMapping(value="/hello",method=RequestMethod.GET)
+	  String hello() {
+		  return "hello";
+	  }
+	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	  boolean addNoteBookItem(@RequestParam("wechatName") String wechatName,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") String createTime,@RequestParam("updateTime") String updateTime) {
 	      NoteBookItemBean item = new NoteBookItemBean();

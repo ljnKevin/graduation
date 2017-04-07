@@ -2,6 +2,7 @@ package com.wechat.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -21,6 +22,34 @@ public class TaskBean implements Serializable{
 	
 	private static final long serialVersionUID = -1080307825061654607L;
 
+	public enum TaskStatus 
+	{
+		COMPLETED("completed"), 
+		VOID("void"), 
+		ACTIVE("active"),
+		CANCELED("canceled");
+		private final String value;
+
+		private TaskStatus(final String value) {
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+
+		public static TaskStatus resolve(final String value) 
+		{
+			for (final TaskStatus s : EnumSet.allOf(TaskStatus.class)) {
+				if (s.toString().equals(value)) {
+					return s;
+				}
+			}
+			return VOID;
+		}
+	}
+	
 	@Id
 	@Column(name="TASK_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Task_seq")
@@ -42,6 +71,9 @@ public class TaskBean implements Serializable{
 	@Column(name="REMARK")
 	private String remark;
 	
+	@Column(name="LOCATION")
+	private String location;
+	
 	@Column(name="START_TIME")
 	private Date startTime;
 	
@@ -53,6 +85,15 @@ public class TaskBean implements Serializable{
 	private UserBean user;
 
 	
+	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public int getCycleDate() {
 		return cycleDate;
 	}

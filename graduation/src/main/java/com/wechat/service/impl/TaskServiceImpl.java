@@ -1,12 +1,19 @@
 package com.wechat.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.jws.WebParam;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wechat.domain.dao.PunchClockDao;
 import com.wechat.domain.dao.TaskDao;
 import com.wechat.domain.dao.UserDao;
+import com.wechat.domain.entity.NoteBookItemBean;
+import com.wechat.domain.entity.PunchClockBean;
 import com.wechat.domain.entity.TaskBean;
 import com.wechat.domain.entity.UserBean;
 import com.wechat.service.TaskService;
@@ -18,6 +25,9 @@ public class TaskServiceImpl implements TaskService{
 	private TaskDao taskDao;
 	
 	@Inject
+	private PunchClockDao punchClockDao;
+	
+	@Inject
 	private UserDao userDao;
 	
 	@Override
@@ -27,5 +37,58 @@ public class TaskServiceImpl implements TaskService{
 		task.setUser(user);
 		taskDao.saveAndFlush(task);
 	}
+	
+	@Override
+	@Transactional
+	public void updateTask(TaskBean task) {
+		TaskBean old = taskDao.getById(task.getTaskId());
+		task.setUser(old.getUser());
+		taskDao.saveAndFlush(task);
+	}
+	
+	@Override
+	@Transactional
+	public List<TaskBean> findAllByWechatName(String wechatName) {
+		return taskDao.findAllByWechatName(wechatName);
+	}
+	
+	@Override
+	@Transactional
+	public List<TaskBean> findAllActiveByWechatName(String wechatName) {
+		Date now = new Date();
+		return taskDao.findAllActiveByWechatName(wechatName,now);
+	}
+	
+	@Override
+	@Transactional
+	public void deleteTaskByTaskId(Long taskId) {
+		taskDao.delete(taskId);
+	}
 
+	@Override
+	@Transactional
+	public boolean checkTodayWhetherHaveClockIn(final Long taskId){
+		Date now = new Date();
+		PunchClockBean punchClock = punchClockDao.findByTaskIdAndCreateTime(taskId,now);
+		if(punchClock !=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	@Override
+	@Transactional
+	public void clockIn(final Long taskId,final String remark,final String location){
+		TaskBean task = taskDao.getOne(taskId);
+		PunchClockBean punchClock = new PunchClockBean();
+		Date now = new Date();
+		punchClock.setCreateTime(now);
+		punchClock.setTask(task);
+		punchClock.setRemark(remark);
+		punchClock.setLocation(location);
+		punchClockDao.saveAndFlush(punchClock);
+		
+	}
+	
 }
