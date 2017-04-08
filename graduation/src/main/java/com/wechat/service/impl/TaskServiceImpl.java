@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wechat.domain.dao.PunchClockDao;
 import com.wechat.domain.dao.TaskDao;
+import com.wechat.domain.dao.TestDao;
 import com.wechat.domain.dao.UserDao;
 import com.wechat.domain.entity.NoteBookItemBean;
 import com.wechat.domain.entity.PunchClockBean;
 import com.wechat.domain.entity.TaskBean;
+import com.wechat.domain.entity.TestBean;
 import com.wechat.domain.entity.UserBean;
 import com.wechat.service.TaskService;
 
@@ -30,12 +32,23 @@ public class TaskServiceImpl implements TaskService{
 	@Inject
 	private UserDao userDao;
 	
+	@Inject
+	private TestDao testDao;
+	
 	@Override
 	@Transactional
 	public void addTask(TaskBean task,String wechatName) {
 		UserBean  user = userDao.getByWechatName(wechatName);
 		task.setUser(user);
 		taskDao.saveAndFlush(task);
+	}
+	
+	@Override
+	@Transactional
+	public void test() {
+		TestBean test = new TestBean();
+		test.setName("小叶");
+		testDao.saveAndFlush(test);
 	}
 	
 	@Override

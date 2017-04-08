@@ -23,6 +23,12 @@ public class TaskController {
 	@Inject
 	private TaskService taskService;
 	
+	@RequestMapping(value="/test",method=RequestMethod.GET)
+	  void testDatabase() {
+		
+		taskService.test();
+	  }
+	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	  boolean addTask(@RequestParam("wechatName") String wechatName,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
