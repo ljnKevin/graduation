@@ -13,6 +13,6 @@ import com.wechat.domain.entity.UserBean;
 
 public interface UserDao extends JpaRepository<UserBean, Long> {
 
-	@Query("select u from UserBean u where u.wechatName=?1")
-    public UserBean getByWechatName(String wechatName);
+	@Query("select u from UserBean u where u.openid=?1")
+    public UserBean getByOpenid(String openid);
 }

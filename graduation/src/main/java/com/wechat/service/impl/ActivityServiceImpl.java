@@ -21,8 +21,8 @@ public class ActivityServiceImpl implements ActivityService{
 	 
 	@Override
 	@Transactional
-	public void addActivity(ActivityBean activity,String wechatName) {
-		UserBean user = userDao.getByWechatName(wechatName);
+	public void addActivity(ActivityBean activity,String openid) {
+		UserBean user = userDao.getByOpenid(openid);
 		activity.setUser(user);
 		activityDao.saveAndFlush(activity);
 	}

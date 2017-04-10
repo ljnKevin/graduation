@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="USER")
+@Table(name="USER_INFO")
 public class UserBean implements Serializable{
 	
 	private static final long serialVersionUID = -1080307825061654607L;
@@ -40,6 +40,9 @@ public class UserBean implements Serializable{
 	
 	@Column(name="DEPARTMENT")
 	private String department;
+	
+	@Column(name="OPENID")
+	private String openid;
 	
 	@OneToMany
 	@JoinColumn(name="NOTEBOOK_ITEM_ID")
@@ -99,6 +102,14 @@ public class UserBean implements Serializable{
 
 	public void setNoteBookItems(Set<NoteBookItemBean> noteBookItems) {
 		this.noteBookItems = noteBookItems;
+	}
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
 	}
 	
 	

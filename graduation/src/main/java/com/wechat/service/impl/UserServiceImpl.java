@@ -16,9 +16,13 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	@Transactional
+	public void addUser(UserBean user) {
+		userDao.saveAndFlush(user);
+	}
+	
+	@Override
+	@Transactional
 	public void updateUser(UserBean user) {
-		//test update
-//		userDao.
-//		userDao.save(user);
+		userDao.saveAndFlush(user);
 	}
 }

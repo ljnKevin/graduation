@@ -23,7 +23,7 @@ public class ActivityController {
 	private ActivityService activityService;
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addActivity(@RequestParam("wechatName") String wechatName,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("minPeople") BigDecimal minPeople,@RequestParam("maxPeople") BigDecimal maxPeople,@RequestParam("nowPeople") BigDecimal nowPeople,@RequestParam("type") String type,@RequestParam("state") String state) throws ParseException {
+	  boolean addActivity(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("minPeople") BigDecimal minPeople,@RequestParam("maxPeople") BigDecimal maxPeople,@RequestParam("nowPeople") BigDecimal nowPeople,@RequestParam("type") String type,@RequestParam("state") String state) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		
@@ -42,7 +42,7 @@ public class ActivityController {
 		activity.setType(type);
 		activity.setState(state);
 		
-		activityService.addActivity(activity,wechatName);
+		activityService.addActivity(activity,openid);
 		return true;
 	  }
 }

@@ -14,7 +14,8 @@ public interface NoteBookItemDao extends JpaRepository<NoteBookItemBean, Long> {
 	@Query("select a from NoteBookItemBean  a where a.noteBookItemId=?1")
     public NoteBookItemBean getById(Long id);
 	
-	@Query("select a from NoteBookItemBean  a where a.user.wechatName=?1")
-    public List<NoteBookItemBean> findAllByWechatName(String wechatName);
+	@Query("select a from NoteBookItemBean  a where a.user.openid=?1")
+    public List<NoteBookItemBean> findAllByOpenid(String openid);
+
 
 }

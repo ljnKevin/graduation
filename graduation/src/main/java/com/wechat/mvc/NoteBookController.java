@@ -25,7 +25,7 @@ public class NoteBookController {
 	  }
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addNoteBookItem(@RequestParam("wechatName") String wechatName,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") String createTime,@RequestParam("updateTime") String updateTime) {
+	  boolean addNoteBookItem(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") String createTime,@RequestParam("updateTime") String updateTime) {
 	      NoteBookItemBean item = new NoteBookItemBean();
 	      Date createDate = new Date(createTime);
 	      Date updateDate = new Date(updateTime);
@@ -34,7 +34,7 @@ public class NoteBookController {
 	      item.setContent(content);
 	      item.setTitle(title);
 	      
-	      noteBookService.addNoteBookItem(item,wechatName);
+	      noteBookService.addNoteBookItem(item,openid);
 		  return true;
 	  }
 	
@@ -59,9 +59,9 @@ public class NoteBookController {
 		  return true;
 	  }
 	
-	@RequestMapping(value="/findAllByWechatName",method=RequestMethod.POST)
-	  boolean findAllByWechatName(@RequestParam("wechatName") String wechatName) {
-	      noteBookService.findAllByWechatName(wechatName);
+	@RequestMapping(value="/findAllByOpenid",method=RequestMethod.POST)
+	  boolean findAllByWechatName(@RequestParam("openid") String openid) {
+	      noteBookService.findAllByOpenid(openid);
 		  return true;
 	  }
 }

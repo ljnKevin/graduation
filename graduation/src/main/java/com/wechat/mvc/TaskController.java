@@ -30,7 +30,7 @@ public class TaskController {
 	  }
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addTask(@RequestParam("wechatName") String wechatName,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
+	  boolean addTask(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		
@@ -46,7 +46,7 @@ public class TaskController {
 	    task.setEndTime(date);
 	    task.setRemark(remark);
 	    task.setLocation(location);
-		taskService.addTask(task,wechatName);
+		taskService.addTask(task,openid);
 		  return true;
 	  }
 	

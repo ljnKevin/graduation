@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="COMMENT")
+@Table(name="ACTIVITY_COMMENT")
 public class CommentBean implements Serializable{
 	
 	private static final long serialVersionUID = -1080307825061654607L;

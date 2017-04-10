@@ -7,6 +7,7 @@ import com.wechat.domain.entity.UserBean;
 @WebService
 public interface UserService {
 	
+	public void addUser(UserBean user);
 	public void updateUser(UserBean user);
 
 }

@@ -23,8 +23,8 @@ public class NoteBookServiceImpl implements NoteBookService{
 	
 	@Override
 	@Transactional
-	public void addNoteBookItem(NoteBookItemBean noteBookItem,String wechatName) {
-		userDao.getByWechatName(wechatName);
+	public void addNoteBookItem(NoteBookItemBean noteBookItem,String openid) {
+		userDao.getByOpenid(openid);
 		noteBookItemDao.saveAndFlush(noteBookItem);
 	}
 	
@@ -44,7 +44,7 @@ public class NoteBookServiceImpl implements NoteBookService{
 	
 	@Override
 	@Transactional
-	public List<NoteBookItemBean> findAllByWechatName(String wechatName) {
-		return noteBookItemDao.findAllByWechatName(wechatName);
+	public List<NoteBookItemBean> findAllByOpenid(String openid) {
+		return noteBookItemDao.findAllByOpenid(openid);
 	}
 }

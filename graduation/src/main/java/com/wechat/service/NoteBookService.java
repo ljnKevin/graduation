@@ -13,5 +13,5 @@ public interface NoteBookService {
 	void addNoteBookItem(@WebParam(name = "noteBookItem") final NoteBookItemBean noteBookItem,@WebParam(name = "wechatName") final String wechatName);
 	void updateNoteBookItem(@WebParam(name = "noteBookItem") final NoteBookItemBean noteBookItem);
 	void deleteNoteBookItem(@WebParam(name = "noteBookItemId") final Long noteBookItemId);
-	List<NoteBookItemBean> findAllByWechatName(@WebParam(name = "wechatName") final String wechatName);
+	List<NoteBookItemBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
 }

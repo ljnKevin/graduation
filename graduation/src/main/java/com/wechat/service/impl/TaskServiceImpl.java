@@ -37,8 +37,8 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Override
 	@Transactional
-	public void addTask(TaskBean task,String wechatName) {
-		UserBean  user = userDao.getByWechatName(wechatName);
+	public void addTask(TaskBean task,String openid) {
+		UserBean  user = userDao.getByOpenid(openid);
 		task.setUser(user);
 		taskDao.saveAndFlush(task);
 	}
