@@ -33,4 +33,16 @@ public class UserController {
 	      userService.addUser(user);
 		  return true;
 	  }
+	
+	@RequestMapping(value="/validate-user",method=RequestMethod.POST)
+	  void validateUser(@RequestParam("openid") String openid) {
+	      
+	      UserBean user = userService.getUserByOpenid(openid);
+	      if(user == null){
+	    	  user = new UserBean();
+		      
+		      user.setOpenid(openid);
+		      userService.addUser(user);
+	      }
+	  }
 }

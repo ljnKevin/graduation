@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wechat.domain.dao.NoteBookItemDao;
 import com.wechat.domain.dao.UserDao;
 import com.wechat.domain.entity.NoteBookItemBean;
+import com.wechat.domain.entity.UserBean;
 import com.wechat.service.NoteBookService;
 
 @Service
@@ -24,7 +25,8 @@ public class NoteBookServiceImpl implements NoteBookService{
 	@Override
 	@Transactional
 	public void addNoteBookItem(NoteBookItemBean noteBookItem,String openid) {
-		userDao.getByOpenid(openid);
+		UserBean user = userDao.getByOpenid(openid);
+		noteBookItem.setUser(user);
 		noteBookItemDao.saveAndFlush(noteBookItem);
 	}
 	

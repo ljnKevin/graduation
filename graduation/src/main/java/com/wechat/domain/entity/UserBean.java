@@ -22,21 +22,21 @@ public class UserBean implements Serializable{
 
 	@Id
 	@Column(name="USER_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="User_seq")
-	@SequenceGenerator(name="User_seq", sequenceName="User_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="User_INFO_seq")
+	@SequenceGenerator(name="User_INFO_seq", sequenceName="User_INFO_seq")
 	private Long userId;
 	
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="WECHATNAME")
+	@Column(name="WECHAT_NAME")
 	private String wechatName;
 	
 	@Column(name="SEX")
 	private String sex;
 	
-	@Column(name="UNIVRSITY")
-	private String univrsity;
+	@Column(name="UNIVERSITY")
+	private String university;
 	
 	@Column(name="DEPARTMENT")
 	private String department;
@@ -80,12 +80,12 @@ public class UserBean implements Serializable{
 		this.sex = sex;
 	}
 
-	public String getUnivrsity() {
-		return univrsity;
+	public String getUniversity() {
+		return university;
 	}
 
-	public void setUnivrsity(String univrsity) {
-		this.univrsity = univrsity;
+	public void setUnivrsity(String university) {
+		this.university = university;
 	}
 
 	public String getDepartment() {

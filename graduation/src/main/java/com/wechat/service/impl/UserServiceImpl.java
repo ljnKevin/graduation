@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService{
 	public void updateUser(UserBean user) {
 		userDao.saveAndFlush(user);
 	}
+	
+	@Override
+	@Transactional
+	public UserBean getUserByOpenid(String openid) {
+		return userDao.getByOpenid(openid);
+	}
 }

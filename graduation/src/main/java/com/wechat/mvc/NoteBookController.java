@@ -25,12 +25,13 @@ public class NoteBookController {
 	  }
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addNoteBookItem(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") String createTime,@RequestParam("updateTime") String updateTime) {
+	  boolean addNoteBookItem(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") Long createTime,@RequestParam("updateTime") Long updateTime) {
 	      NoteBookItemBean item = new NoteBookItemBean();
-	      Date createDate = new Date(createTime);
-	      Date updateDate = new Date(updateTime);
-	      item.setCreateTime(createDate);
-	      item.setUpdateTime(updateDate);
+	      Date date = new Date();
+	      date.setTime(createTime);
+	      item.setCreateTime(date);
+	      date.setTime(updateTime);
+	      item.setUpdateTime(date);
 	      item.setContent(content);
 	      item.setTitle(title);
 	      
