@@ -1,6 +1,7 @@
 package com.wechat.mvc;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,13 +41,11 @@ public class NoteBookController {
 	  }
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	  boolean updateNoteBookItem(@RequestParam("noteBookItemId") Long noteBookItemId,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("createTime") String createTime,@RequestParam("updateTime") String updateTime) {
-	      NoteBookItemBean item = new NoteBookItemBean();
-	      item.setNoteBookItemId(noteBookItemId);
-	      Date createDate = new Date(createTime);
-	      Date updateDate = new Date(updateTime);
-	      item.setCreateTime(createDate);
-	      item.setUpdateTime(updateDate);
+	  boolean updateNoteBookItem(@RequestParam("noteBookItemId") Long noteBookItemId,@RequestParam("title") String title,@RequestParam("content") String content) {
+	      NoteBookItemBean item = noteBookService.getByNoteBookItemId(noteBookItemId);
+	      Date now = new Date();
+	      item.setUpdateTime(now);
+	      
 	      item.setContent(content);
 	      item.setTitle(title);
 	      
@@ -61,8 +60,14 @@ public class NoteBookController {
 	  }
 	
 	@RequestMapping(value="/findAllByOpenid",method=RequestMethod.POST)
-	  boolean findAllByWechatName(@RequestParam("openid") String openid) {
-	      noteBookService.findAllByOpenid(openid);
-		  return true;
+	  List<NoteBookItemBean> findAllByWechatName(@RequestParam("openid") String openid) {
+	      
+		  return noteBookService.findAllByOpenid(openid);
+	  }
+	
+	@RequestMapping(value="/getByNoteBookItemId",method=RequestMethod.POST)
+	  NoteBookItemBean getByNoteBookItemId(@RequestParam("noteBookItemId") Long noteBookItemId) {
+	      
+		  return noteBookService.getByNoteBookItemId(noteBookItemId);
 	  }
 }

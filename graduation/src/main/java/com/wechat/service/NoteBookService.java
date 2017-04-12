@@ -14,4 +14,5 @@ public interface NoteBookService {
 	void updateNoteBookItem(@WebParam(name = "noteBookItem") final NoteBookItemBean noteBookItem);
 	void deleteNoteBookItem(@WebParam(name = "noteBookItemId") final Long noteBookItemId);
 	List<NoteBookItemBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
+	NoteBookItemBean getByNoteBookItemId(@WebParam(name = "noteBookItemId") final Long noteBookItemId);
 }

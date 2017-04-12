@@ -33,8 +33,6 @@ public class NoteBookServiceImpl implements NoteBookService{
 	@Override
 	@Transactional
 	public void updateNoteBookItem(NoteBookItemBean noteBookItem) {
-		NoteBookItemBean old = noteBookItemDao.getById(noteBookItem.getNoteBookItemId());
-		noteBookItem.setUser(old.getUser());
 		noteBookItemDao.saveAndFlush(noteBookItem);
 	}
 
@@ -48,5 +46,11 @@ public class NoteBookServiceImpl implements NoteBookService{
 	@Transactional
 	public List<NoteBookItemBean> findAllByOpenid(String openid) {
 		return noteBookItemDao.findAllByOpenid(openid);
+	}
+	
+	@Override
+	@Transactional
+	public NoteBookItemBean getByNoteBookItemId(Long noteBookItemId) {
+		return noteBookItemDao.getById(noteBookItemId);
 	}
 }
