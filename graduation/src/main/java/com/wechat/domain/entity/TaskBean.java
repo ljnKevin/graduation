@@ -59,6 +59,24 @@ public class TaskBean implements Serializable{
 	@Column(name="TITLE")
 	private String title;
 	
+	@Column(name="LOCATION")
+	private String location;
+	
+	@Column(name="START_TIME")
+	private Date startTime;
+	
+	@Column(name="END_TIME")
+	private Date endTime;
+	
+	@Column(name="SIGN_TIME")
+	private Date signTime;
+	
+	@Column(name="LONGITUDE")
+	private String latitude;
+	
+	@Column(name="LONGITUDE")
+	private int longitude;
+	
 	@Column(name="CYCLE")
 	private String cycle;
 	
@@ -71,21 +89,35 @@ public class TaskBean implements Serializable{
 	@Column(name="REMARK")
 	private String remark;
 	
-	@Column(name="LOCATION")
-	private String location;
-	
-	@Column(name="START_TIME")
-	private Date startTime;
-	
-	@Column(name="END_TIME")
-	private Date endTime;
-	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private UserBean user;
 
 	
-	
+	public Date getSignTime() {
+		return signTime;
+	}
+
+	public void setSignTime(Date signTime) {
+		this.signTime = signTime;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public int getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(int longitude) {
+		this.longitude = longitude;
+	}
+
 	public String getLocation() {
 		return location;
 	}

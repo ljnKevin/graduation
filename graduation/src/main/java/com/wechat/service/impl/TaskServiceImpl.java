@@ -61,8 +61,8 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Override
 	@Transactional
-	public List<TaskBean> findAllByWechatName(String wechatName) {
-		return taskDao.findAllByWechatName(wechatName);
+	public List<TaskBean> findAllByOpenid(String opendi) {
+		return taskDao.findAllByOpenid(opendi);
 	}
 	
 	@Override

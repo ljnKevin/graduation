@@ -71,10 +71,10 @@ public class TaskController {
 		  return true;
 	  }
 	
-	@RequestMapping(value="/findAllByWechatName",method=RequestMethod.POST)
-	  List<TaskBean> findAllByWechatName(@RequestParam("wechatName") String wechatName) {
+	@RequestMapping(value="/findAllByOpenid",method=RequestMethod.POST)
+	  List<TaskBean> findAllByWechatName(@RequestParam("openid") String openid) {
 		
-		  return taskService.findAllByWechatName(wechatName);
+		  return taskService.findAllByOpenid(openid);
 	  }
 	
 	@RequestMapping(value="/findAllActiveTask",method=RequestMethod.POST)

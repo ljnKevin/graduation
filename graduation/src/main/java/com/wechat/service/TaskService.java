@@ -15,7 +15,7 @@ public interface TaskService {
 	
 	void addTask(@WebParam(name = "task") final TaskBean task,@WebParam(name = "openid") final String openid);
 	void updateTask(@WebParam(name = "task") final TaskBean task);
-	List<TaskBean> findAllByWechatName(@WebParam(name = "wechatName") final String wechatName);
+	List<TaskBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
 	List<TaskBean> findAllActiveByWechatName(@WebParam(name = "wechatName") final String wechatName);
 	void deleteTaskByTaskId(@WebParam(name = "taskId") final Long taskId);
 	boolean checkTodayWhetherHaveClockIn(@WebParam(name = "taskId") final Long taskId);

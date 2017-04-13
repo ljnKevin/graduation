@@ -17,8 +17,8 @@ public interface TaskDao extends JpaRepository<TaskBean, Long> {
 	@Query("select a from TaskBean  a where a.taskId=?1")
     public TaskBean getById(Long id);
 	
-	@Query("select t from TaskBean  t where t.user.wechatName=?1")
-    public List<TaskBean> findAllByWechatName(String wechatName);
+	@Query("select t from TaskBean  t where t.user.openid=?1")
+    public List<TaskBean> findAllByOpenid(String openid);
 	
 	@Query("select t from TaskBean  t where t.user.wechatName=?1 and t.startTime <= ?2 and t.endTime >= ?3")
     public List<TaskBean> findAllActiveByWechatName(String wechatName,Date now);
