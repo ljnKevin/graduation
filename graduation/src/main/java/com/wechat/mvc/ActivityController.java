@@ -23,26 +23,27 @@ public class ActivityController {
 	private ActivityService activityService;
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addActivity(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("minPeople") BigDecimal minPeople,@RequestParam("maxPeople") BigDecimal maxPeople,@RequestParam("nowPeople") BigDecimal nowPeople,@RequestParam("type") String type,@RequestParam("state") String state) throws ParseException {
+	  boolean addActivity(@RequestParam("submitObject") ActivityBean submitObject) throws ParseException {
+	 // boolean addActivity(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("minPeople") BigDecimal minPeople,@RequestParam("maxPeople") BigDecimal maxPeople,@RequestParam("nowPeople") BigDecimal nowPeople,@RequestParam("type") String type,@RequestParam("state") String state) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		
-		ActivityBean activity  = new ActivityBean();
-		activity.setTitle(title);
-		activity.setRemark(remark);
-		date = sdf.parse(startTime);
-		activity.setStartTime(date);
-		date = sdf.parse(endTime);
-		activity.setEndTime(date);
-		date = sdf.parse(createTime);
-		activity.setCreateTime(date);
-		activity.setMinPeople(minPeople);
-		activity.setMaxPeople(maxPeople);
-		activity.setNowPeople(nowPeople);
-		activity.setType(type);
-		activity.setState(state);
-		
-		activityService.addActivity(activity,openid);
+//		ActivityBean activity  = new ActivityBean();
+//		activity.setTitle(title);
+//		activity.setRemark(remark);
+//		date = sdf.parse(startTime);
+//		activity.setStartTime(date);
+//		date = sdf.parse(endTime);
+//		activity.setEndTime(date);
+//		date = sdf.parse(createTime);
+//		activity.setCreateTime(date);
+//		activity.setMinPeople(minPeople);
+//		activity.setMaxPeople(maxPeople);
+//		activity.setNowPeople(nowPeople);
+//		activity.setType(type);
+//		activity.setState(state);
+//		
+//		activityService.addActivity(activity,openid);
 		return true;
 	  }
 }

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -50,6 +51,34 @@ public class TaskBean implements Serializable{
 		}
 	}
 	
+	public enum TaskCycle 
+	{
+		DAILY("daily"), 
+		WEEKLY("weekly"), 
+		MONTHLY("monthly");
+		
+		private final String value;
+
+		private TaskCycle(final String value) {
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+
+		public static TaskCycle resolve(final String value) 
+		{
+			for (final TaskCycle s : EnumSet.allOf(TaskCycle.class)) {
+				if (s.toString().equals(value)) {
+					return s;
+				}
+			}
+			return DAILY;
+		}
+	}
+	
 	@Id
 	@Column(name="TASK_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Task_seq")
@@ -59,8 +88,14 @@ public class TaskBean implements Serializable{
 	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="LOCATION")
-	private String location;
+	@Column(name="ADDRESS")
+	private String address;
+	
+	@Column(name="LATITUDE")
+	private String latitude;
+	
+	@Column(name="LONGITUDE")
+	private String longitude;
 	
 	@Column(name="START_TIME")
 	private Date startTime;
@@ -68,20 +103,11 @@ public class TaskBean implements Serializable{
 	@Column(name="END_TIME")
 	private Date endTime;
 	
-	@Column(name="SIGN_TIME")
-	private Date signTime;
-	
-	@Column(name="LONGITUDE")
-	private String latitude;
-	
-	@Column(name="LONGITUDE")
-	private int longitude;
-	
 	@Column(name="CYCLE")
 	private String cycle;
 	
 	@Column(name="CYCLE_DATE")
-	private int cycleDate;
+	private String cycleDate;
 	
 	@Column(name="CREATE_TIME")
 	private Date createTime;
@@ -89,19 +115,23 @@ public class TaskBean implements Serializable{
 	@Column(name="REMARK")
 	private String remark;
 	
+	@Column(name="LAST_ADDRESS")
+	private String lastAddress;
+	
+	@Column(name="LAST_LATITUDE")
+	private String lastLatitude;
+	
+	@Column(name="LAST_LONGITUDE")
+	private String lastLongitude;
+	
+	@Column(name="LAST_DATE")
+	private Date lastDate;
+	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private UserBean user;
 
 	
-	public Date getSignTime() {
-		return signTime;
-	}
-
-	public void setSignTime(Date signTime) {
-		this.signTime = signTime;
-	}
-
 	public String getLatitude() {
 		return latitude;
 	}
@@ -110,27 +140,19 @@ public class TaskBean implements Serializable{
 		this.latitude = latitude;
 	}
 
-	public int getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(int longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public int getCycleDate() {
+	public String getCycleDate() {
 		return cycleDate;
 	}
 
-	public void setCycleDate(int cycleDate) {
+	public void setCycleDate(String cycleDate) {
 		this.cycleDate = cycleDate;
 	}
 
@@ -198,5 +220,46 @@ public class TaskBean implements Serializable{
 		this.user = user;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLastAddress() {
+		return lastAddress;
+	}
+
+	public void setLastAddress(String lastAddress) {
+		this.lastAddress = lastAddress;
+	}
+
+	public String getLastLatitude() {
+		return lastLatitude;
+	}
+
+	public void setLastLatitude(String lastLatitude) {
+		this.lastLatitude = lastLatitude;
+	}
+
+	public String getLastLongitude() {
+		return lastLongitude;
+	}
+
+	public void setLastLongitude(String lastLongitude) {
+		this.lastLongitude = lastLongitude;
+	}
+
+	public Date getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
+	}
+
+	
 	
 }

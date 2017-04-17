@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wechat.domain.entity.NoteBookItemBean;
 import com.wechat.domain.entity.TaskBean;
+import com.wechat.domain.model.TaskModel;
 import com.wechat.service.TaskService;
 
 @RestController
@@ -30,22 +31,22 @@ public class TaskController {
 	  }
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addTask(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
+	  boolean addTask(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("address") String address,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude,@RequestParam("startDay") String startDay,@RequestParam("endDay") String endDay,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") String cycleDate) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date=null;
+		Date date= new Date();
 		
 		TaskBean task = new TaskBean();
 	    task.setTitle(title);
+	    task.setAddress(address);
+	    task.setLatitude(latitude);
+	    task.setLongitude(longitude);
 	    task.setCycle(cycle);
 	    task.setCycleDate(cycleDate);
-	    date = sdf.parse(createTime);
 	    task.setCreateTime(date);
-	    date = sdf.parse(startTime);
+	    date = sdf.parse(startDay);
 	    task.setStartTime(date);
-	    date = sdf.parse(endTime);
+	    date = sdf.parse(endDay);
 	    task.setEndTime(date);
-	    task.setRemark(remark);
-	    task.setLocation(location);
 		taskService.addTask(task,openid);
 		  return true;
 	  }
@@ -58,7 +59,7 @@ public class TaskController {
 		  task.setTaskId(taskId);
 		  task.setTitle(title);
 		    task.setCycle(cycle);
-		    task.setCycleDate(cycleDate);
+//		    task.setCycleDate(cycleDate);
 		    date = sdf.parse(createTime);
 		    task.setCreateTime(date);
 		    date = sdf.parse(startTime);
@@ -66,7 +67,7 @@ public class TaskController {
 		    date = sdf.parse(endTime);
 		    task.setEndTime(date);
 		    task.setRemark(remark);
-		    task.setLocation(location);
+//		    task.setLocation(location);
 			taskService.updateTask(task);
 		  return true;
 	  }
@@ -87,9 +88,21 @@ public class TaskController {
 		  return taskService.checkTodayWhetherHaveClockIn(taskId);
 	  }
 	
+	@RequestMapping(value="/checkTask",method=RequestMethod.POST)
+	int checkTask(@RequestParam("taskId") Long taskId) {
+		  return taskService.checkTask(taskId);
+	  }
+	
+	@RequestMapping(value="/details",method=RequestMethod.POST)
+	TaskModel details(@RequestParam("taskId") Long taskId) {
+			TaskModel taskModel = taskService.getDetailsByTaskId(taskId);
+			
+		  return taskModel;
+	  }
+	
 	@RequestMapping(value="/clockIn",method=RequestMethod.POST)
-	void clockIn(@RequestParam("taskId") Long taskId,@RequestParam("remark") String remark,@RequestParam("location") String location) {
-		  taskService.clockIn(taskId,remark,location);
+	void clockIn(@RequestParam("openid") String openid,@RequestParam("taskId") Long taskId,@RequestParam("humor") String humor,@RequestParam("address") String address,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude) {
+		  taskService.clockIn(taskId,humor,address,latitude,longitude);
 	  }
 	
 	@RequestMapping(value="/delete",method=RequestMethod.POST)

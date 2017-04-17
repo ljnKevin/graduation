@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="TASK")
+@Table(name="PUNCH_CLOCK")
 public class PunchClockBean implements Serializable{
 	
 	private static final long serialVersionUID = -1080307825061654607L;
@@ -27,17 +27,20 @@ public class PunchClockBean implements Serializable{
 	@SequenceGenerator(name="PUNCH_CLOCK_seq", sequenceName="PUNCH_CLOCK_seq")
 	private Long punchClockId;
 	
-	@Column(name="TITLE")
-	private String type;
-	
 	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column(name="REMARK")
-	private String remark;
+	@Column(name="HUMOR")
+	private String humor;
 	
-	@Column(name="LOCATION")
-	private String location;
+	@Column(name="ADDRESS")
+	private String address;
+	
+	@Column(name="LATITUDE")
+	private String latitude;
+	
+	@Column(name="LONGITUDE")
+	private String longitude;
 	
 	@ManyToOne
 	@JoinColumn(name="TASK_ID")
@@ -51,14 +54,6 @@ public class PunchClockBean implements Serializable{
 		this.punchClockId = punchClockId;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -67,12 +62,12 @@ public class PunchClockBean implements Serializable{
 		this.createTime = createTime;
 	}
 
-	public String getRemark() {
-		return remark;
+	public String getHumor() {
+		return humor;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setHumor(String humor) {
+		this.humor = humor;
 	}
 
 	public TaskBean getTask() {
@@ -83,13 +78,30 @@ public class PunchClockBean implements Serializable{
 		this.task = task;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setAddress(String address) {
+		this.address = address;
 	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	
 
 	
 }

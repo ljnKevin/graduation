@@ -54,6 +54,15 @@ public class ActivityBean implements Serializable{
 	@Column(name="TYPE")
 	private String type;
 	
+	@Column(name="COST")
+	private BigDecimal cost;
+	
+	@Column(name="TELPHONE")
+	private String telphone;
+	
+	@Column(name="DESCRIPTION")
+	private String description;
+	
 	@Column(name="STATE")
 	private String state;
 	
@@ -161,6 +170,30 @@ public class ActivityBean implements Serializable{
 		this.user = user;
 	}
 
+	public BigDecimal getCost() {
+		return cost;
+	}
+
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
+	}
+
+	public String getTelphone() {
+		return telphone;
+	}
+
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 	
 }
