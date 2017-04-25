@@ -32,27 +32,27 @@ public class WalletServiceImpl implements WalletService{
 		walletDao.saveAndFlush(wallet);
 	}
 	
-//	@Override
-//	@Transactional
-//	public void updateNoteBookItem(NoteBookItemBean noteBookItem) {
-//		noteBookItemDao.saveAndFlush(noteBookItem);
-//	}
-//
-//	@Override
-//	@Transactional
-//	public void deleteNoteBookItem(Long noteBookItemId) {
-//		noteBookItemDao.delete(noteBookItemId);
-//	}
-//	
-//	@Override
-//	@Transactional
-//	public List<NoteBookItemBean> findAllByOpenid(String openid) {
-//		return noteBookItemDao.findAllByOpenid(openid);
-//	}
-//	
-//	@Override
-//	@Transactional
-//	public NoteBookItemBean getByNoteBookItemId(Long noteBookItemId) {
-//		return noteBookItemDao.getById(noteBookItemId);
-//	}
+	@Override
+	@Transactional
+	public void updateWallet(WalletBean wallet) {
+		walletDao.saveAndFlush(wallet);
+	}
+
+	@Override
+	@Transactional
+	public void deleteWallet(Long walletId) {
+		walletDao.delete(walletId);
+	}
+	
+	@Override
+	@Transactional
+	public List<WalletBean> findAllByOpenid(String openid) {
+		return walletDao.findAllByOpenid(openid);
+	}
+	
+	@Override
+	@Transactional
+	public WalletBean getByWalletId(Long walletId) {
+		return walletDao.getById(walletId);
+	}
 }

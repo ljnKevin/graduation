@@ -12,8 +12,8 @@ import com.wechat.domain.entity.WalletBean;
 
 public interface WalletDao extends JpaRepository<WalletBean, Long> {
 
-	@Query("select a from NoteBookItemBean  a where a.user.openid=?1")
-    public List<NoteBookItemBean> findAllByOpenid(String openid);
+	@Query("select w from WalletBean  w where w.user.openid=?1")
+    public List<WalletBean> findAllByOpenid(String openid);
 
 
 }

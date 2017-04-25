@@ -26,49 +26,71 @@ public class WalletController {
 	
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addNoteBookItem(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("billDate") String billDate,@RequestParam("category") String category,@RequestParam("billType") String billType,@RequestParam("money") String money) throws ParseException {
+	  boolean addNoteBookItem(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("billDate") String billDate,@RequestParam("category") String category,@RequestParam("billType") String billType,@RequestParam("money") BigDecimal money) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();  
 		WalletBean item = new WalletBean();
 		date = sdf.parse(billDate);
 	      item.setBillDate(date);
-	      switch : 
-	      item.setBillWeek(billWeek);
+	      switch (item.getBillDate().getDay()){
+	      	case 0: item.setBillWeek("星期天");break;
+	      	case 1: item.setBillWeek("星期一");break;
+	      	case 2: item.setBillWeek("星期二");break;
+	      	case 3: item.setBillWeek("星期三");break;
+	      	case 4: item.setBillWeek("星期四");break;
+	      	case 5: item.setBillWeek("星期五");break;
+	      	case 6: item.setBillWeek("星期六");break;
+	      }
 	      item.setRemark(remark);
 	      item.setTitle(title);
-	      
+	      item.setCategory(category);
+	      item.setBillType(billType);
+	      item.setMoney(money);
 	      walletService.addWallet(item,openid);
 		  return true;
 	  }
 	
-//	@RequestMapping(value="/update",method=RequestMethod.POST)
-//	  boolean updateNoteBookItem(@RequestParam("noteBookItemId") Long noteBookItemId,@RequestParam("title") String title,@RequestParam("content") String content) {
-//	      NoteBookItemBean item = noteBookService.getByNoteBookItemId(noteBookItemId);
-//	      Date now = new Date();
-//	      item.setUpdateTime(now);
-//	      
-//	      item.setContent(content);
-//	      item.setTitle(title);
-//	      
-//	      noteBookService.updateNoteBookItem(item);
-//		  return true;
-//	  }
-//	
-//	@RequestMapping(value="/delete",method=RequestMethod.POST)
-//	  boolean deleteNoteBookItem(@RequestParam("noteBookItemId") Long noteBookItemId) {
-//	      noteBookService.deleteNoteBookItem(noteBookItemId);
-//		  return true;
-//	  }
-//	
-//	@RequestMapping(value="/findAllByOpenid",method=RequestMethod.POST)
-//	  List<NoteBookItemBean> findAllByWechatName(@RequestParam("openid") String openid) {
-//	      
-//		  return noteBookService.findAllByOpenid(openid);
-//	  }
-//	
-//	@RequestMapping(value="/getByNoteBookItemId",method=RequestMethod.POST)
-//	  NoteBookItemBean getByNoteBookItemId(@RequestParam("noteBookItemId") Long noteBookItemId) {
-//	      
-//		  return noteBookService.getByNoteBookItemId(noteBookItemId);
-//	  }
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	  boolean updateNoteBookItem(@RequestParam("walletId") Long walletId,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("billDate") String billDate,@RequestParam("category") String category,@RequestParam("billType") String billType,@RequestParam("money") BigDecimal money) {
+		  WalletBean item = walletService.getByWalletId(walletId);
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date=new Date();  
+	      date = sdf.parse(billDate);
+	      item.setBillDate(date);
+	      switch (item.getBillDate().getDay()){
+	      	case 0: item.setBillWeek("星期天");break;
+	      	case 1: item.setBillWeek("星期一");break;
+	      	case 2: item.setBillWeek("星期二");break;
+	      	case 3: item.setBillWeek("星期三");break;
+	      	case 4: item.setBillWeek("星期四");break;
+	      	case 5: item.setBillWeek("星期五");break;
+	      	case 6: item.setBillWeek("星期六");break;
+	      }
+	      item.setRemark(remark);
+	      item.setTitle(title);
+	      item.setCategory(category);
+	      item.setBillType(billType);
+	      item.setMoney(money);
+	      
+	      walletService.updateWallet(item);
+		  return true;
+	  }
+	
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	  boolean deleteWallet(@RequestParam("walletId") Long walletId) {
+		walletService.deleteWallet(walletId);
+		  return true;
+	  }
+	
+	@RequestMapping(value="/findAllByOpenid",method=RequestMethod.POST)
+	  List<WalletBean> findAllByOpenid(@RequestParam("openid") String openid) {
+	      
+		  return walletService.findAllByOpenid(openid);
+	  }
+	
+	@RequestMapping(value="/getByWalletId",method=RequestMethod.POST)
+	  WalletBean getByWalletId(@RequestParam("walletId") Long walletId) {
+	      
+		  return walletService.getByWalletId(walletId);
+	  }
 }

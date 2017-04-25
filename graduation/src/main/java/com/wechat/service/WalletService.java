@@ -12,8 +12,8 @@ import com.wechat.domain.entity.WalletBean;
 public interface WalletService {
 	
 	void addWallet(@WebParam(name = "wallet") final WalletBean wallet,@WebParam(name = "openid") final String openid);
-//	void updateNoteBookItem(@WebParam(name = "noteBookItem") final NoteBookItemBean noteBookItem);
-//	void deleteNoteBookItem(@WebParam(name = "noteBookItemId") final Long noteBookItemId);
-//	List<NoteBookItemBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
-//	NoteBookItemBean getByNoteBookItemId(@WebParam(name = "noteBookItemId") final Long noteBookItemId);
+	void updateWallet(@WebParam(name = "wallet") final WalletBean wallet);
+	void deleteWallet(@WebParam(name = "walletId") final Long walletId);
+	List<WalletBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
+	WalletBean getByWalletId(@WebParam(name = "walletId") final Long walletId);
 }

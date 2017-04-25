@@ -34,6 +34,18 @@ public class UserController {
 		  return true;
 	  }
 	
+	@RequestMapping(value="/edit",method=RequestMethod.POST)
+	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("wechatName") String wechatName,@RequestParam("sex") String sex,@RequestParam("univrsity") String univrsity,@RequestParam("department") String department,@RequestParam("userId") Long userId) {
+	      UserBean user = userService.getUserByUserId(userId)
+	      user.setName(name);
+	      user.setWechatName(wechatName);
+	      user.setSex(sex);
+	      user.setUnivrsity(univrsity);
+	      user.setDepartment(department);
+	      userService.updateUser(user);
+		  return true;
+	  }
+	
 	@RequestMapping(value="/validate-user",method=RequestMethod.POST)
 	  void validateUser(@RequestParam("openid") String openid) {
 	      
