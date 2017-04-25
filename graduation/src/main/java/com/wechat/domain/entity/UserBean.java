@@ -22,8 +22,8 @@ public class UserBean implements Serializable{
 
 	@Id
 	@Column(name="USER_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="User_INFO_seq")
-	@SequenceGenerator(name="User_INFO_seq", sequenceName="User_INFO_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_INFO_SEQ")
+	@SequenceGenerator(name="USER_INFO_SEQ", sequenceName="USER_INFO_SEQ")
 	private Long userId;
 	
 	@Column(name="NAME")
@@ -44,9 +44,8 @@ public class UserBean implements Serializable{
 	@Column(name="OPENID")
 	private String openid;
 	
-	@OneToMany
-	@JoinColumn(name="NOTEBOOK_ITEM_ID")
-	private Set<NoteBookItemBean> noteBookItems;
+	@Column(name="AVATARURL")
+	private String avatarUrl;
 
 	public Long getUserId() {
 		return userId;
@@ -96,20 +95,24 @@ public class UserBean implements Serializable{
 		this.department = department;
 	}
 
-	public Set<NoteBookItemBean> getNoteBookItems() {
-		return noteBookItems;
-	}
-
-	public void setNoteBookItems(Set<NoteBookItemBean> noteBookItems) {
-		this.noteBookItems = noteBookItems;
-	}
-
 	public String getOpenid() {
 		return openid;
 	}
 
 	public void setOpenid(String openid) {
 		this.openid = openid;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 	
 	

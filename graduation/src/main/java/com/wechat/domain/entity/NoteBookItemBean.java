@@ -22,8 +22,8 @@ public class NoteBookItemBean implements Serializable{
 
 	@Id
 	@Column(name="NOTEBOOK_ITEM_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NoteBook_Item_seq")
-	@SequenceGenerator(name="NoteBook_Item_seq", sequenceName="NoteBook_Item_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOTEBOOK_ITEM_SEQ")
+	@SequenceGenerator(name="NOTEBOOK_ITEM_SEQ", sequenceName="NOTEBOOK_ITEM_SEQ")
 	private Long noteBookItemId;
 	
 	@Column(name="TITLE")

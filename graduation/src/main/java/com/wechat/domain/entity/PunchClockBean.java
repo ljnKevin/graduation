@@ -23,8 +23,8 @@ public class PunchClockBean implements Serializable{
 
 	@Id
 	@Column(name="PUNCH_CLOCK_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PUNCH_CLOCK_seq")
-	@SequenceGenerator(name="PUNCH_CLOCK_seq", sequenceName="PUNCH_CLOCK_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PUNCH_CLOCK_SEQ")
+	@SequenceGenerator(name="PUNCH_CLOCK_SEQ", sequenceName="PUNCH_CLOCK_SEQ")
 	private Long punchClockId;
 	
 	@Column(name="CREATE_TIME")

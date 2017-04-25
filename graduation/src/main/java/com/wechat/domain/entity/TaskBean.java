@@ -81,8 +81,8 @@ public class TaskBean implements Serializable{
 	
 	@Id
 	@Column(name="TASK_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Task_seq")
-	@SequenceGenerator(name="Task_seq", sequenceName="Task_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TASK_SEQ")
+	@SequenceGenerator(name="TASK_SEQ", sequenceName="TASK_SEQ")
 	private Long taskId;
 	
 	@Column(name="TITLE")

@@ -1,85 +1,53 @@
-package com.wechat.domain.entity;
+package com.wechat.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import com.wechat.domain.entity.UserBean;
 
 
-@Entity
-@Table(name="ACTIVITY")
-public class ActivityBean implements Serializable{
+public class ActivityModel implements Serializable{
 	
-	private static final long serialVersionUID = -1080307825061654607L;
+	private static final long serialVersionUID = -3296665202817288877L;
 
-	@Id
-	@Column(name="ACTIVITY_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACTIVITY_SEQ")
-	@SequenceGenerator(name="ACTIVITY_SEQ", sequenceName="ACTIVITY_SEQ")
 	private Long activityId;
 	
-	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="ADDRESS")
 	private String address;
 	
-	@Column(name="LATITUDE")
 	private String latitude;
 	
-	@Column(name="LONGITUDE")
 	private String longitude;
 	
-	@Column(name="START_TIME")
 	private Date startTime;
 	
-	@Column(name="END_TIME")
 	private Date endTime;
 	
-	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column(name="MIN_PEOPLE")
 	private BigDecimal minPeople;
 	
-	@Column(name="MAX_PEOPLE")
 	private BigDecimal maxPeople;
 	
-	@Column(name="NOW_PEOPLE")
 	private BigDecimal nowPeople;
 	
-	@Column(name="TYPE")
 	private String type;
 	
-	@Column(name="COST")
 	private BigDecimal cost;
 	
-	@Column(name="TELPHONE")
 	private String telphone;
 	
-	@Column(name="DESCRIPTION")
 	private String description;
 	
-	@Column(name="STATE")
-	private String state;
-	
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private UserBean user;
+	private boolean state;
 
+	private UserBean creater;
 	
-
+	private List<UserBean> userList;
 	
-
 	public Long getActivityId() {
 		return activityId;
 	}
@@ -176,22 +144,6 @@ public class ActivityBean implements Serializable{
 		this.type = type;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public UserBean getUser() {
-		return user;
-	}
-
-	public void setUser(UserBean user) {
-		this.user = user;
-	}
-
 	public BigDecimal getCost() {
 		return cost;
 	}
@@ -215,7 +167,31 @@ public class ActivityBean implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public boolean getState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
+	public List<UserBean> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<UserBean> userList) {
+		this.userList = userList;
+	}
+
+	public UserBean getCreater() {
+		return creater;
+	}
+
+	public void setCreater(UserBean creater) {
+		this.creater = creater;
+	}
+
 	
 	
 }

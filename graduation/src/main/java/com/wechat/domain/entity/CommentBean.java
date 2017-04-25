@@ -23,8 +23,8 @@ public class CommentBean implements Serializable{
 
 	@Id
 	@Column(name="COMMENT_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Comment_seq")
-	@SequenceGenerator(name="Comment_seq", sequenceName="Comment_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="COMMENT_SEQ")
+	@SequenceGenerator(name="COMMENT_SEQ", sequenceName="COMMENT_SEQ")
 	private Long commentId;
 	
 	@Column(name="LIKE_COUNT")
@@ -41,8 +41,8 @@ public class CommentBean implements Serializable{
 	private UserBean user;
 
 	@ManyToOne
-	@JoinColumn(name="NOTEBOOK_ITEM_ID")
-	private NoteBookItemBean noteBookItem;
+	@JoinColumn(name="ACTIVITY_ID")
+	private ActivityBean activity;
 
 	public Long getCommentId() {
 		return commentId;
@@ -84,13 +84,15 @@ public class CommentBean implements Serializable{
 		this.user = user;
 	}
 
-	public NoteBookItemBean getNoteBookItem() {
-		return noteBookItem;
+	public ActivityBean getActivity() {
+		return activity;
 	}
 
-	public void setNoteBookItem(NoteBookItemBean noteBookItem) {
-		this.noteBookItem = noteBookItem;
+	public void setActivity(ActivityBean activity) {
+		this.activity = activity;
 	}
+
+	
 	
 	
 	

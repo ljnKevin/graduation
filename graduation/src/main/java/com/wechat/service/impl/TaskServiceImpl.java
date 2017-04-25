@@ -95,7 +95,7 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	@Transactional
 	public int checkTask(final Long taskId){
-		TaskBean task = taskDao.getOne(taskId);
+		TaskBean task = taskDao.getById(taskId);
 		Date now = new Date();
 		
 		if(TaskBean.TaskCycle.WEEKLY.toString().equals(task.getCycle())){
@@ -119,7 +119,7 @@ public class TaskServiceImpl implements TaskService{
 				return 2;
 			}
 		}else{
-			if(task.getLastDate().getYear() == now.getYear() && task.getLastDate().getMonth() == now.getMonth() && task.getLastDate().getDate() == now.getDate()){
+			if((task.getLastDate()!=null && task.getLastDate()!=null && task.getLastDate()!=null) || (task.getLastDate().getYear() == now.getYear() && task.getLastDate().getMonth() == now.getMonth() && task.getLastDate().getDate() == now.getDate()) ){
 				return 1;
 			}else{
 				return 0;
@@ -155,7 +155,7 @@ public class TaskServiceImpl implements TaskService{
 	public void clockIn(final Long taskId,final String humor,final String address,final String latitude,final String longitude){
 		Date now = new Date();
 		
-		TaskBean task = taskDao.getOne(taskId);
+		TaskBean task = taskDao.getById(taskId);
 		task.setLastAddress(address);
 		task.setLastDate(now);
 		taskDao.saveAndFlush(task);
