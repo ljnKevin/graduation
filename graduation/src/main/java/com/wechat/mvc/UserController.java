@@ -36,7 +36,7 @@ public class UserController {
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST)
 	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("wechatName") String wechatName,@RequestParam("sex") String sex,@RequestParam("univrsity") String univrsity,@RequestParam("department") String department,@RequestParam("userId") Long userId) {
-	      UserBean user = userService.getUserByUserId(userId)
+	      UserBean user = userService.getByUserId(userId);
 	      user.setName(name);
 	      user.setWechatName(wechatName);
 	      user.setSex(sex);

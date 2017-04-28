@@ -31,4 +31,10 @@ public class UserServiceImpl implements UserService{
 	public UserBean getUserByOpenid(String openid) {
 		return userDao.getByOpenid(openid);
 	}
+	
+	@Override
+	@Transactional
+	public UserBean getByUserId(Long userId) {
+		return userDao.getOne(userId);
+	}
 }

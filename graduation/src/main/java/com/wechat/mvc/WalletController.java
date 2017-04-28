@@ -1,5 +1,6 @@
 package com.wechat.mvc;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wechat.domain.entity.NoteBookItemBean;
 import com.wechat.domain.entity.WalletBean;
+import com.wechat.domain.model.WalletModel;
 import com.wechat.service.NoteBookService;
 import com.wechat.service.WalletService;
 
@@ -51,7 +53,7 @@ public class WalletController {
 	  }
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	  boolean updateNoteBookItem(@RequestParam("walletId") Long walletId,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("billDate") String billDate,@RequestParam("category") String category,@RequestParam("billType") String billType,@RequestParam("money") BigDecimal money) {
+	  boolean updateNoteBookItem(@RequestParam("walletId") Long walletId,@RequestParam("title") String title,@RequestParam("remark") String remark,@RequestParam("billDate") String billDate,@RequestParam("category") String category,@RequestParam("billType") String billType,@RequestParam("money") BigDecimal money) throws ParseException {
 		  WalletBean item = walletService.getByWalletId(walletId);
 		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date=new Date();  
@@ -89,8 +91,12 @@ public class WalletController {
 	  }
 	
 	@RequestMapping(value="/getByWalletId",method=RequestMethod.POST)
-	  WalletBean getByWalletId(@RequestParam("walletId") Long walletId) {
-	      
-		  return walletService.getByWalletId(walletId);
+	WalletModel getByWalletId(@RequestParam("walletId") Long walletId) {
+		  WalletBean wallet = walletService.getByWalletId(walletId);
+		  WalletModel walletModel = new WalletModel();
+		  walletModel.setTitle(wallet.getTitle());
+		  walletModel.setMoney(wallet.getMoney());
+		  walletModel.setRemark(wallet.getRemark());
+		  return walletModel;
 	  }
 }

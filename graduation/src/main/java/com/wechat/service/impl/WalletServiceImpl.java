@@ -53,6 +53,6 @@ public class WalletServiceImpl implements WalletService{
 	@Override
 	@Transactional
 	public WalletBean getByWalletId(Long walletId) {
-		return walletDao.getById(walletId);
+		return walletDao.getOne(walletId);
 	}
 }

@@ -1,4 +1,4 @@
-package com.wechat.domain.entity;
+package com.wechat.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,43 +15,26 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name="WALLET")
-public class WalletBean implements Serializable{
+public class WalletModel implements Serializable{
 	
-	private static final long serialVersionUID = 2603111680093089349L;
+	private static final long serialVersionUID = -781677198579633848L;
 
-	@Id
-	@Column(name="WALLET_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="WALLET_SEQ")
-	@SequenceGenerator(name="WALLET_SEQ", sequenceName="WALLET_SEQ")
 	private Long walletId;
 	
-	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="REMARK")
 	private String remark;
 	
-	@Column(name="BILL_DATE")
 	private Date billDate;
 	
-	@Column(name="BILL_TYPE")
 	private String billType;
 	
-	@Column(name="CATEGORY")
 	private String category;
 	
-	@Column(name="BILL_WEEK")
 	private String billWeek;
 	
-	@Column(name="MONEY")
 	private BigDecimal money;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private UserBean user;
-
 	public Long getWalletId() {
 		return walletId;
 	}
@@ -106,14 +89,6 @@ public class WalletBean implements Serializable{
 
 	public void setMoney(BigDecimal money) {
 		this.money = money;
-	}
-
-	public UserBean getUser() {
-		return user;
-	}
-
-	public void setUser(UserBean user) {
-		this.user = user;
 	}
 
 	public String getCategory() {
