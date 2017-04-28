@@ -48,6 +48,8 @@ public class ActivityModel implements Serializable{
 	
 	private List<UserBean> userList;
 	
+	private double distance;
+	
 	public Long getActivityId() {
 		return activityId;
 	}
@@ -192,6 +194,13 @@ public class ActivityModel implements Serializable{
 		this.creater = creater;
 	}
 
-	
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
 	
 }

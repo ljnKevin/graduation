@@ -15,5 +15,6 @@ public interface WalletService {
 	void updateWallet(@WebParam(name = "wallet") final WalletBean wallet);
 	void deleteWallet(@WebParam(name = "walletId") final Long walletId);
 	List<WalletBean> findAllByOpenid(@WebParam(name = "openid") final String openid);
+	List<WalletBean> findByKeyword(@WebParam(name = "keyword") final String keyword);
 	WalletBean getByWalletId(@WebParam(name = "walletId") final Long walletId);
 }

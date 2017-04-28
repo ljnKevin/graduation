@@ -52,7 +52,7 @@ public class ActivityController {
 	
 	@RequestMapping(value="/findAllCreateByOpenid",method=RequestMethod.POST)
 	  List<ActivityBean> findAllCreateByOpenid(@RequestParam("openid") String openid) {
-		
+			
 		  return activityService.findAllCreateByOpenid(openid);
 	  }
 	
@@ -62,8 +62,8 @@ public class ActivityController {
 	  }
 	
 	@RequestMapping(value="/details",method=RequestMethod.POST)
-	ActivityModel details(@RequestParam("openid") String openid,@RequestParam("activityId") Long activityId) {
-		ActivityModel activityModel = activityService.getDetailsByActivityId(openid,activityId);
+	ActivityModel details(@RequestParam("openid") String openid,@RequestParam("activityId") Long activityId,@RequestParam("myLon") double myLon,@RequestParam("myLat") double myLat) {
+		ActivityModel activityModel = activityService.getDetailsByActivityId(openid,activityId,myLon,myLat);
 			
 		  return activityModel;
 	  }

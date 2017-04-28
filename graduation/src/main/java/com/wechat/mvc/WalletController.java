@@ -99,4 +99,10 @@ public class WalletController {
 		  walletModel.setRemark(wallet.getRemark());
 		  return walletModel;
 	  }
+	
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	  List<WalletBean> search(@RequestParam("keyword") String keyword) {
+	      
+		  return walletService.findByKeyword(openid);
+	  }
 }

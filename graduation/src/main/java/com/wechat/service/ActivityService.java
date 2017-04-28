@@ -19,4 +19,5 @@ public interface ActivityService {
 	List<ActivityBean> findAll();
 	ActivityModel getDetailsByActivityId(@WebParam(name = "openid") final String openid,@WebParam(name = "activityId") final Long activityId);
 	void joinActivity(@WebParam(name = "openid") final String openid,@WebParam(name = "activityId") final Long activityId);
+	double LantitudeLongitudeDist(double lon1, double lat1,double lon2, double lat2);
 }

@@ -1,5 +1,6 @@
 package com.wechat.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,6 +49,15 @@ public class WalletServiceImpl implements WalletService{
 	@Transactional
 	public List<WalletBean> findAllByOpenid(String openid) {
 		return walletDao.findAllByOpenid(openid);
+	}
+	
+	@Override
+	@Transactional
+	public List<WalletBean> findByKeyword(String keyword) {
+		List<WalletBean> resultList = new ArrayList<>();
+		resultList.addAll(walletDao.findBookByTitle(keyword));
+		resultList.addAll(walletDao.findBookByRemark(keyword));
+		return resultList;
 	}
 	
 	@Override
