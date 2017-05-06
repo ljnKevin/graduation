@@ -74,7 +74,6 @@ public class ActivityServiceImpl implements ActivityService{
 		return activityDao.findAll();
 	}
 
-	@Override
 	public ActivityModel activityBeanToActivityModel(ActivityBean activity,double myLon, double myLat) {
 		ActivityModel activityModel = new ActivityModel();
 		
@@ -96,6 +95,9 @@ public class ActivityServiceImpl implements ActivityService{
 		activityModel.setCreater(activity.getUser());
 		
 		double dist = this.LantitudeLongitudeDist(myLon,myLat,Double.valueOf(activity.getLongitude()),Double.valueOf(activity.getLatitude()));
+		BigDecimal b = new BigDecimal(dist);  
+		dist = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue(); 
+		
 		activityModel.setDistance(dist);
 		
 		return activityModel;
@@ -103,12 +105,12 @@ public class ActivityServiceImpl implements ActivityService{
 	
 	@Override
 	@Transactional
-	public ActivityModel getDetailsByActivityId(final String openid,final Long activityId,double myLon, double myLat){
+	public ActivityModel getDetailsByActivityId(final String openid,final Long activityId,String myLon, String myLat){
 		ActivityBean activity = activityDao.getOne(activityId);
 		UserBean user = userDao.getByOpenid(openid);
 		List<ActivityUserBean> activityUserList = activityUserDao.findByActivityId(activityId);
 		
-		ActivityModel activityModel = activityBeanToActivityModel(activity,myLon,myLat);
+		ActivityModel activityModel = activityBeanToActivityModel(activity,Double.parseDouble(myLon),Double.parseDouble(myLat));
 		List<UserBean> userList = new ArrayList<>();
 		for(ActivityUserBean activityUser : activityUserList){
 			if(activityUser.getUser().getOpenid().equals(user.getOpenid())){
@@ -150,7 +152,7 @@ public class ActivityServiceImpl implements ActivityService{
      * @param lat3 第二点的纬度 
      * @return 返回的距离，单位km 
      * */
-	public static double LantitudeLongitudeDist(double lon1, double lat1,double lon2, double lat2) {  
+	public double LantitudeLongitudeDist(double lon1, double lat1,double lon2, double lat2) {  
         double radLat1 = rad(lat1);  
         double radLat2 = rad(lat2);  
   

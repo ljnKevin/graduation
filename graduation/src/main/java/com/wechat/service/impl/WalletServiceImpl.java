@@ -53,10 +53,10 @@ public class WalletServiceImpl implements WalletService{
 	
 	@Override
 	@Transactional
-	public List<WalletBean> findByKeyword(String keyword) {
+	public List<WalletBean> findByKeyword(String openid,String keyword) {
 		List<WalletBean> resultList = new ArrayList<>();
-		resultList.addAll(walletDao.findBookByTitle(keyword));
-		resultList.addAll(walletDao.findBookByRemark(keyword));
+		resultList.addAll(walletDao.findBookByTitle(openid,keyword));
+		resultList.addAll(walletDao.findBookByRemark(openid,keyword));
 		return resultList;
 	}
 	

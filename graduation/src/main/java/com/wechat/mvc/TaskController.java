@@ -2,6 +2,7 @@ package com.wechat.mvc;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class TaskController {
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	  boolean addTask(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("address") String address,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude,@RequestParam("startDay") String startDay,@RequestParam("endDay") String endDay,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") String cycleDate) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date= new Date();
 		
 		TaskBean task = new TaskBean();
@@ -43,10 +44,21 @@ public class TaskController {
 	    task.setCycle(cycle);
 	    task.setCycleDate(cycleDate);
 	    task.setCreateTime(date);
+	    
 	    date = sdf.parse(startDay);
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(date);
+	    calendar.set(Calendar.HOUR_OF_DAY, 0);
+	    calendar.set(Calendar.MINUTE, 0);
+	    calendar.set(Calendar.SECOND, 0);
+	    date = calendar.getTime();
 	    task.setStartTime(date);
-	    date = sdf.parse(endDay);
+	    
+	    calendar.add(Calendar.DAY_OF_MONTH, 1);
+	    calendar.add(Calendar.SECOND, -1);
+	    date = calendar.getTime();
 	    task.setEndTime(date);
+	    
 		taskService.addTask(task,openid);
 		  return true;
 	  }

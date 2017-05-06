@@ -17,7 +17,7 @@ public interface ActivityService {
 	List<ActivityBean> findAllCreateByOpenid(@WebParam(name = "openid") final String openid);
 	List<ActivityBean> findAllJoinByOpenid(@WebParam(name = "openid") final String openid);
 	List<ActivityBean> findAll();
-	ActivityModel getDetailsByActivityId(@WebParam(name = "openid") final String openid,@WebParam(name = "activityId") final Long activityId);
+	ActivityModel getDetailsByActivityId(@WebParam(name = "openid") final String openid,@WebParam(name = "activityId") final Long activityId,@WebParam(name = "myLon") final String myLon,@WebParam(name = "myLat") final String myLat);
 	void joinActivity(@WebParam(name = "openid") final String openid,@WebParam(name = "activityId") final Long activityId);
 	double LantitudeLongitudeDist(double lon1, double lat1,double lon2, double lat2);
 }

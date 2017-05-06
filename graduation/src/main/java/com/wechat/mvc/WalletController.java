@@ -101,8 +101,8 @@ public class WalletController {
 	  }
 	
 	@RequestMapping(value="/search",method=RequestMethod.POST)
-	  List<WalletBean> search(@RequestParam("keyword") String keyword) {
+	  List<WalletBean> search(@RequestParam("openid") String openid,@RequestParam("keyword") String keyword) {
 	      
-		  return walletService.findByKeyword(openid);
+		  return walletService.findByKeyword(openid,keyword);
 	  }
 }

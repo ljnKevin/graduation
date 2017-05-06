@@ -15,9 +15,9 @@ public interface WalletDao extends JpaRepository<WalletBean, Long> {
 	@Query("select w from WalletBean  w where w.user.openid=?1")
     public List<WalletBean> findAllByOpenid(String openid);
 
-	@Query("select w from WalletBean w where b.title like %?1%")
-	public List<WalletBean> findBookByTitle(String title);
+	@Query("select w from WalletBean w where w.user.openid=?1 and w.title like %?2%")
+	public List<WalletBean> findBookByTitle(String openid,String title);
 	
-	@Query("select w from WalletBean w where b.remark like %?1%")
-	public List<WalletBean> findBookByRemark(String remark);
+	@Query("select w from WalletBean w where w.user.openid=?1 and w.remark like %?2%")
+	public List<WalletBean> findBookByRemark(String openid,String remark);
 }

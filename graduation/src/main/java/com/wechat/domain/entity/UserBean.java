@@ -83,10 +83,6 @@ public class UserBean implements Serializable{
 		return university;
 	}
 
-	public void setUnivrsity(String university) {
-		this.university = university;
-	}
-
 	public String getDepartment() {
 		return department;
 	}

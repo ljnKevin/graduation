@@ -1,5 +1,6 @@
 package com.wechat.service.impl;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -62,8 +63,9 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Override
 	@Transactional
-	public List<TaskBean> findAllByOpenid(String opendi) {
-		return taskDao.findAllByOpenid(opendi);
+	public List<TaskBean> findAllByOpenid(String openid) {
+		Date now = new Date();
+		return taskDao.findAllByOpenid(openid,now);
 	}
 	
 	@Override
@@ -97,10 +99,14 @@ public class TaskServiceImpl implements TaskService{
 	public int checkTask(final Long taskId){
 		TaskBean task = taskDao.getById(taskId);
 		Date now = new Date();
-		
+		Calendar cal=Calendar.getInstance();  
+	    cal.setTime(now); 
+	    Calendar calLast=Calendar.getInstance();  
+		calLast.setTime(task.getLastDate());
 		if(TaskBean.TaskCycle.WEEKLY.toString().equals(task.getCycle())){
-			if((now.getDay() == Integer.parseInt(task.getCycleDate()))  || (now.getDay() == 0 && Integer.parseInt(task.getCycleDate()) == 7)){
-				if(task.getLastDate().getYear() == now.getYear() && task.getLastDate().getMonth() == now.getMonth() && task.getLastDate().getDate() == now.getDate()){
+			if((cal.get(Calendar.DAY_OF_WEEK) == Integer.parseInt(task.getCycleDate()))  || (cal.get(Calendar.DAY_OF_WEEK) == 0 && Integer.parseInt(task.getCycleDate()) == 7)){
+				
+				if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
 					return 1;
 				}else{
 					return 0;
@@ -109,8 +115,8 @@ public class TaskServiceImpl implements TaskService{
 				return 2;
 			}
 		}else if(TaskBean.TaskCycle.MONTHLY.toString().equals(task.getCycle())){
-			if(now.getDate() == Integer.parseInt(task.getCycleDate())){
-				if(task.getLastDate().getYear() == now.getYear() && task.getLastDate().getMonth() == now.getMonth() && task.getLastDate().getDate() == now.getDate()){
+			if(cal.get(Calendar.DAY_OF_MONTH) == Integer.parseInt(task.getCycleDate())){
+				if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
 					return 1;
 				}else{
 					return 0;
@@ -119,7 +125,7 @@ public class TaskServiceImpl implements TaskService{
 				return 2;
 			}
 		}else{
-			if((task.getLastDate()!=null && task.getLastDate()!=null && task.getLastDate()!=null) || (task.getLastDate().getYear() == now.getYear() && task.getLastDate().getMonth() == now.getMonth() && task.getLastDate().getDate() == now.getDate()) ){
+			if((task.getLastDate()==null) || (calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)) ){
 				return 1;
 			}else{
 				return 0;

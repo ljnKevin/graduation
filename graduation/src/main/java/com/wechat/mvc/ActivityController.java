@@ -62,7 +62,7 @@ public class ActivityController {
 	  }
 	
 	@RequestMapping(value="/details",method=RequestMethod.POST)
-	ActivityModel details(@RequestParam("openid") String openid,@RequestParam("activityId") Long activityId,@RequestParam("myLon") double myLon,@RequestParam("myLat") double myLat) {
+	ActivityModel details(@RequestParam("openid") String openid,@RequestParam("activityId") Long activityId,@RequestParam("myLon") String myLon,@RequestParam("myLat") String myLat) {
 		ActivityModel activityModel = activityService.getDetailsByActivityId(openid,activityId,myLon,myLat);
 			
 		  return activityModel;

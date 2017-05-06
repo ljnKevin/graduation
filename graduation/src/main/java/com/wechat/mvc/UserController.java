@@ -22,12 +22,12 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("wechatName") String wechatName,@RequestParam("sex") String sex,@RequestParam("univrsity") String univrsity,@RequestParam("department") String department,@RequestParam("openid") String openid) {
+	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("wechatName") String wechatName,@RequestParam("sex") String sex,@RequestParam("university") String university,@RequestParam("department") String department,@RequestParam("openid") String openid) {
 	      UserBean user = new UserBean();
 	      user.setName(name);
 	      user.setWechatName(wechatName);
 	      user.setSex(sex);
-	      user.setUnivrsity(univrsity);
+	      user.setUniversity(university);
 	      user.setDepartment(department);
 	      user.setOpenid(openid);
 	      userService.addUser(user);
@@ -35,12 +35,10 @@ public class UserController {
 	  }
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST)
-	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("wechatName") String wechatName,@RequestParam("sex") String sex,@RequestParam("univrsity") String univrsity,@RequestParam("department") String department,@RequestParam("userId") Long userId) {
+	  boolean addNoteBookItem(@RequestParam("name") String name,@RequestParam("university") String university,@RequestParam("department") String department,@RequestParam("userId") Long userId) {
 	      UserBean user = userService.getByUserId(userId);
 	      user.setName(name);
-	      user.setWechatName(wechatName);
-	      user.setSex(sex);
-	      user.setUnivrsity(univrsity);
+	      user.setUniversity(university);
 	      user.setDepartment(department);
 	      userService.updateUser(user);
 		  return true;
@@ -56,5 +54,12 @@ public class UserController {
 		      user.setOpenid(openid);
 		      userService.addUser(user);
 	      }
+	  }
+	
+	@RequestMapping(value="/get-by-openid",method=RequestMethod.POST)
+	UserBean getByOpenid(@RequestParam("openid") String openid) {
+	      
+	      return userService.getUserByOpenid(openid);
+	      
 	  }
 }
