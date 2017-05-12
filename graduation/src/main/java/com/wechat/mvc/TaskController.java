@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wechat.domain.entity.NoteBookItemBean;
+import com.wechat.domain.entity.PunchClockBean;
 import com.wechat.domain.entity.TaskBean;
 import com.wechat.domain.model.TaskModel;
 import com.wechat.service.TaskService;
@@ -33,7 +34,7 @@ public class TaskController {
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	  boolean addTask(@RequestParam("openid") String openid,@RequestParam("title") String title,@RequestParam("address") String address,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude,@RequestParam("startDay") String startDay,@RequestParam("endDay") String endDay,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") String cycleDate) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date= new Date();
 		
 		TaskBean task = new TaskBean();
@@ -54,9 +55,13 @@ public class TaskController {
 	    date = calendar.getTime();
 	    task.setStartTime(date);
 	    
-	    calendar.add(Calendar.DAY_OF_MONTH, 1);
-	    calendar.add(Calendar.SECOND, -1);
-	    date = calendar.getTime();
+	    date = sdf.parse(endDay);
+	    Calendar calendar1 = Calendar.getInstance();
+	    calendar1.setTime(date);
+	    calendar1.set(Calendar.HOUR_OF_DAY, 0);
+	    calendar1.set(Calendar.MINUTE, 0);
+	    calendar1.set(Calendar.SECOND, 0);
+	    date = calendar1.getTime();
 	    task.setEndTime(date);
 	    
 		taskService.addTask(task,openid);
@@ -64,7 +69,7 @@ public class TaskController {
 	  }
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	  boolean updateNoteBookItem(@RequestParam("taskId") Long taskId,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
+	  boolean updateTask(@RequestParam("taskId") Long taskId,@RequestParam("title") String title,@RequestParam("cycle") String cycle,@RequestParam("cycleDate") int cycleDate,@RequestParam("createTime") String createTime,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime,@RequestParam("remark") String remark,@RequestParam("location") String location) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;  
 		TaskBean task = new TaskBean();
@@ -95,11 +100,6 @@ public class TaskController {
 		  return taskService.findAllActiveByWechatName(wechatName);
 	  }
 	
-	@RequestMapping(value="/todayHaveClockIn",method=RequestMethod.POST)
-	boolean checkTodayWhetherHaveClockIn(@RequestParam("taskId") Long taskId) {
-		  return taskService.checkTodayWhetherHaveClockIn(taskId);
-	  }
-	
 	@RequestMapping(value="/checkTask",method=RequestMethod.POST)
 	int checkTask(@RequestParam("taskId") Long taskId) {
 		  return taskService.checkTask(taskId);
@@ -110,6 +110,11 @@ public class TaskController {
 			TaskModel taskModel = taskService.getDetailsByTaskId(taskId);
 			
 		  return taskModel;
+	  }
+	
+	@RequestMapping(value="/punchClocks",method=RequestMethod.POST)
+	List<PunchClockBean> punchClocks(@RequestParam("taskId") Long taskId) {
+		  return taskService.getPunchClocksByTaskId(taskId);
 	  }
 	
 	@RequestMapping(value="/clockIn",method=RequestMethod.POST)

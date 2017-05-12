@@ -18,4 +18,6 @@ public interface PunchClockDao extends JpaRepository<PunchClockBean, Long> {
 	@Query("select p from PunchClockBean  p where p.task.taskId = ?1 and p.createTime=?2")
     public PunchClockBean findByTaskIdAndCreateTime(Long taskId,Date now);
 
+	@Query("select p from PunchClockBean  p where p.task.taskId = ?1")
+    public List<PunchClockBean> findByTaskId(Long taskId);
 }

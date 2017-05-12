@@ -2,6 +2,9 @@ package com.wechat.domain.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.wechat.domain.entity.PunchClockBean;
 
 
 public class TaskModel implements Serializable{
@@ -157,6 +160,6 @@ public class TaskModel implements Serializable{
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
 	}
-	
+
 	
 }

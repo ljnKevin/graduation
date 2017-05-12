@@ -81,18 +81,6 @@ public class TaskServiceImpl implements TaskService{
 		taskDao.delete(taskId);
 	}
 
-	@Override
-	@Transactional
-	public boolean checkTodayWhetherHaveClockIn(final Long taskId){
-		Date now = new Date();
-		PunchClockBean punchClock = punchClockDao.findByTaskIdAndCreateTime(taskId,now);
-		if(punchClock !=null){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
 	@SuppressWarnings("deprecation")
 	@Override
 	@Transactional
@@ -101,34 +89,53 @@ public class TaskServiceImpl implements TaskService{
 		Date now = new Date();
 		Calendar cal=Calendar.getInstance();  
 	    cal.setTime(now); 
-	    Calendar calLast=Calendar.getInstance();  
-		calLast.setTime(task.getLastDate());
+	    
 		if(TaskBean.TaskCycle.WEEKLY.toString().equals(task.getCycle())){
 			if((cal.get(Calendar.DAY_OF_WEEK) == Integer.parseInt(task.getCycleDate()))  || (cal.get(Calendar.DAY_OF_WEEK) == 0 && Integer.parseInt(task.getCycleDate()) == 7)){
 				
-				if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
-					return 1;
+				if(task.getLastDate()!=null){
+					Calendar calLast=Calendar.getInstance();  
+					calLast.setTime(task.getLastDate());
+					if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
+						return 1;
+					}else{
+						return 0;
+					}
 				}else{
 					return 0;
 				}
+				
 			}else{
 				return 2;
 			}
 		}else if(TaskBean.TaskCycle.MONTHLY.toString().equals(task.getCycle())){
 			if(cal.get(Calendar.DAY_OF_MONTH) == Integer.parseInt(task.getCycleDate())){
+				if(task.getLastDate()!=null){
+					Calendar calLast=Calendar.getInstance();  
+					calLast.setTime(task.getLastDate());
+					if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
+						return 1;
+					}else{
+						return 0;
+					}
+				}else{
+					return 0;
+				}
+				
+			}else{
+				return 2;
+			}
+		}else{
+			if(task.getLastDate()==null){
+				return 0;
+			}else{
+				Calendar calLast=Calendar.getInstance();  
+				calLast.setTime(task.getLastDate());
 				if(calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)){
 					return 1;
 				}else{
 					return 0;
 				}
-			}else{
-				return 2;
-			}
-		}else{
-			if((task.getLastDate()==null) || (calLast.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)) ){
-				return 1;
-			}else{
-				return 0;
 			}
 		}
 		
@@ -152,8 +159,12 @@ public class TaskServiceImpl implements TaskService{
 			taskModel.setCycle("每天");
 		}
 		taskModel.setCycleDate(task.getCycleDate());
-		
 		return taskModel;
+	}
+	@Override
+	@Transactional
+	public List<PunchClockBean> getPunchClocksByTaskId(final Long taskId){
+		return punchClockDao.findByTaskId(taskId);
 	}
 	
 	@Override
